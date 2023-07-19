@@ -1,0 +1,86 @@
+* {
+  box-sizing: border-box;
+  margin: 0;
+  padding: 0;
+  font-family: 'Roboto', sans-serif;
+}
+
+body {
+  background-color: #EEF2F4;
+}
+
+main {
+  width: 100%;
+  max-width: 1200px;
+  margin: 0 auto;
+  padding: 120px;
+
+  h3 {
+    margin: 90px 0 40px 0;
+    font-size: 32px;
+  }
+
+  .operator {
+
+    input,
+    select {
+      width: 350px;
+      height: 60px;
+      border: 1px solid #C4C4C4;
+      outline: none;
+      padding: 0 10px;
+      font-size: 18px;
+      margin-bottom: 5px;
+    }
+  }
+
+  p {
+    font-size: 12px;
+    color: #86969C;
+  }
+
+  .wifi {
+    input {
+      cursor: pointer;
+      margin-right: 10px;
+    }
+  }
+
+  .submit {
+    background-color: #7A5CFA;
+    color: #FFF;
+    border: none;
+    padding: 33px 30px 33px 30px;
+    border-radius: 15px;
+    cursor: pointer;
+    font-size: 32px;
+  }
+
+  .wifi {
+    margin: 10px 0;
+  }
+}
+
+.socialNetwork {
+  display: flex;
+  width: 510px;
+  margin-bottom: 90px;
+  justify-content: space-between;
+  text-align: center;
+
+  .socials {
+    cursor: pointer;
+    padding: 15px;
+    background-color: unset;
+    height: 120px;
+
+    p {
+      font-size: 24px;
+    }
+  }
+
+  .active {
+    background-color: white;
+    border-radius: 45px 45px 15px 15px;
+  }
+}
