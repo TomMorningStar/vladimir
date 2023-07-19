@@ -7,6 +7,7 @@ export const rootSlice = createSlice({
     operator: '' as string,
     minutes: 200 as number,
     internet: 5 as number,
+    sms: 0 as number,
     wifi: {
       rent: false,
       buy: false
@@ -32,10 +33,14 @@ export const rootSlice = createSlice({
     },
     setSocialsSum: (state, action) => {
       state.socialsSum = action.payload as number;
+    },
+    setSms: (state, action) => {
+      state.sms = action.payload as number;
     }
+
   }
 });
 
 export default rootSlice.reducer;
-export const { setPhone, setMinutes, setInternet, setBue, setRent, setSocialsSum } = rootSlice.actions;
+export const { setPhone, setMinutes, setSms, setInternet, setBue, setRent, setSocialsSum } = rootSlice.actions;
 

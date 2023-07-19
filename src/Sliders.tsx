@@ -3,7 +3,7 @@ import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
 import { AppDispatch } from './store';
 import { useDispatch } from "react-redux";
-import { setInternet, setMinutes } from './store/rootSlice';
+import { setInternet, setMinutes, setSms } from './store/rootSlice';
 
 interface Marks {
   marks: {
@@ -28,6 +28,10 @@ const Sliders = (props: Marks) => {
 
     if (props.type === 'internet') {
       dispatch(setInternet(newValue))
+    }
+
+    if (props.type === 'sms') {
+      dispatch(setSms(newValue))
     }
   };
 
