@@ -70,9 +70,9 @@ function App() {
   }
 
   React.useEffect(() => {
-    const newSum = minutes + internet + socialNetworkSum + (rentValue ? 99 : 0) + (buyValue ? 2600 : 0);
+    const newSum = minutes + sms + internet + socialNetworkSum + (rentValue ? 99 : 0) + (buyValue ? 2600 : 0);
     setSum(newSum);
-  }, [minutes, internet, socialNetworkSum, rentValue, buyValue]);
+  }, [minutes, internet, sms, socialNetworkSum, rentValue, buyValue]);
 
 
   return (
