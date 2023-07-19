@@ -99,7 +99,7 @@ function App() {
           </select>
         </div>
 
-        <div className="minutes">
+        <div className="section">
           <h3>Минуты</h3>
           <Sliders marks={{
             200: '200',
@@ -109,7 +109,17 @@ function App() {
           }} color="#7A5CFA" type="minutes" />
         </div>
 
-        <div className="internet">
+        <div className="section">
+          <h3>СМС</h3>
+          <Sliders marks={{
+            0: '0',
+            50: '50',
+            100: '100',
+            150: '150',
+          }} color="#1A5CFA" type="sms" />
+        </div>
+
+        <div className="section">
           <h3>Интернет</h3>
           <Sliders marks={{
             5: '5',
