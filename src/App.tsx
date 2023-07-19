@@ -8,7 +8,7 @@ function App() {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const { minutes, internet } = useSelector((state: RootState) => state.rootSlice);
+  const { minutes, internet, sms } = useSelector((state: RootState) => state.rootSlice);
   const [phoneValue, setPhoneValue] = React.useState<string>('');
   const [operatorValue, setOperatorValue] = React.useState<string>('МТС');
   const [rentValue, setRentValue] = React.useState<boolean>(false);
@@ -60,6 +60,7 @@ function App() {
         operator: operatorValue,
         minutes,
         internet,
+        sms,
         rentValue,
         buyValue,
         socialsSum: socialNetworkSum,
