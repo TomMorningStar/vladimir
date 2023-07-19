@@ -1,8 +1,8 @@
 import React from 'react';
 import Slider from 'rc-slider';
 import 'rc-slider/assets/index.css';
-import { AppDispatch } from './store';
-import { useDispatch } from "react-redux";
+import { AppDispatch, RootState } from './store';
+import { useDispatch, useSelector } from "react-redux";
 import { setInternet, setMinutes, setSms } from './store/rootSlice';
 
 interface Marks {
@@ -16,6 +16,8 @@ interface Marks {
 const Sliders = (props: Marks) => {
   const [value, setValue] = React.useState<number>(Number(Object.entries(props.marks)[0][0]));
   const dispatch: AppDispatch = useDispatch();
+  const { minutes, internet, sms } = useSelector((state: RootState) => state.rootSlice);
+
 
   const handleChange = (newValue: number | number[]) => {
     if (typeof newValue === 'number') {
@@ -35,6 +37,17 @@ const Sliders = (props: Marks) => {
     }
   };
 
+  const slidersValueInServer = () => {
+    if (props.type === 'minutes') {
+      return minutes
+    }
+    if (props.type === 'internet') {
+      return internet
+    }
+    if (props.type === 'sms') {
+      return sms
+    }
+  }
   return (
     <div style={{ width: '100%', maxWidth: '1200px', margin: '90px 0' }}>
       <Slider
@@ -43,7 +56,7 @@ const Sliders = (props: Marks) => {
         step={null}
         defaultValue={Number(Object.entries(props.marks)[0][0])}
         marks={props.marks}
-        value={value}
+        value={slidersValueInServer()}
         onChange={handleChange}
         railStyle={{ background: '#B8C6CF', height: '10px' }}
         trackStyle={{ background: props.color, height: '10px' }}

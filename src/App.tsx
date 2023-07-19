@@ -2,19 +2,34 @@ import React from 'react'
 import Sliders from './Sliders';
 import { AppDispatch, RootState } from './store';
 import { useDispatch, useSelector } from "react-redux";
-import { setBue, setPhone, setRent, setSocialsSum } from './store/rootSlice';
+import { fetchingData, setBue, setPhone, setRent, setSocialsSum } from './store/rootSlice';
 
 function App() {
 
   const dispatch: AppDispatch = useDispatch();
 
-  const { minutes, internet, sms } = useSelector((state: RootState) => state.rootSlice);
+  const { minutes, internet, sms, loading, phone } = useSelector((state: RootState) => state.rootSlice);
   const [phoneValue, setPhoneValue] = React.useState<string>('');
   const [operatorValue, setOperatorValue] = React.useState<string>('МТС');
   const [rentValue, setRentValue] = React.useState<boolean>(false);
   const [buyValue, setBuyValue] = React.useState<boolean>(false);
   const [isValid, setIsValid] = React.useState<boolean>(true);
   const [sum, setSum] = React.useState<number>(0);
+
+
+  React.useEffect(() => {
+    setTimeout(() => {
+      dispatch(fetchingData({
+        phone: '+7 (999) 999-99-99' as string,
+        operator: 'МТС',
+        minutes: 350,
+        internet: 35,
+        sms: 50,
+        rent: false,
+        buy: false,
+      }))
+    }, 300)
+  }, [dispatch])
 
   const [socialNetwork, setSocialNetwork] = React.useState([
     { icon: '/facebook.png', price: 20, checked: false },
@@ -76,6 +91,12 @@ function App() {
     setSum(newSum);
   }, [minutes, internet, sms, socialNetworkSum, rentValue, buyValue]);
 
+  if (loading) return (
+    <div style={{ display: 'flex', justifyContent: 'center', alignItems: 'center', height: '100vh' }}>
+      <h1>Загрузка...</h1>
+    </div>
+  )
+
   return (
     <main>
       <h1>Настройте тариф</h1>
@@ -84,7 +105,7 @@ function App() {
 
         <div className="operator">
           <h3> Телефон</h3>
-          <input style={{ border: !isValid ? '1px solid red' : '' }} value={phoneValue} onChange={(e) => handleChangePhone(e)} type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" />
+          <input style={{ border: !isValid ? '1px solid red' : '' }} value={phoneValue ? phoneValue : phone} onChange={(e) => handleChangePhone(e)} type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" />
           <p>
             {!isValid ? <span style={{ color: 'red' }}> Неверный формат</span> : 'Обязательное поле'}
           </p>
