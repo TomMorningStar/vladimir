@@ -13,6 +13,8 @@ function App() {
   const [operatorValue, setOperatorValue] = React.useState<string>('МТС');
   const [rentValue, setRentValue] = React.useState<boolean>(false);
   const [buyValue, setBuyValue] = React.useState<boolean>(false);
+  const [isValid, setIsValid] = React.useState<boolean>(true);
+  const [sum, setSum] = React.useState<number>(0);
 
   const [socialNetwork, setSocialNetwork] = React.useState([
     { icon: '/facebook.png', price: 20, checked: false },
@@ -32,6 +34,13 @@ function App() {
     setSocialNetwork(newSocialNetwork);
   }
 
+  const handleChangePhone = (e: React.ChangeEvent<HTMLInputElement>) => {
+    const phoneRegex = /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/;
+    setIsValid(phoneRegex.test(e.target.value))
+    setPhoneValue(e.target.value)
+  }
+
+
   const socialNetworkSum = socialNetwork.reduce((acc, item) => {
     if (item.checked) {
       acc += item.price;
@@ -39,15 +48,8 @@ function App() {
     return acc;
   }, 0);
 
-
-  const [sum, setSum] = React.useState<number>(0);
-
-  const phoneRegex = /^\+7\s\(\d{3}\)\s\d{3}-\d{2}-\d{2}$/;
-  const isValid = phoneRegex.test(phoneValue);
-
   const handleSubmit = (e: React.FormEvent<HTMLFormElement>) => {
     e.preventDefault();
-
 
     if (isValid) {
       dispatch(setPhone(phoneValue))
@@ -74,7 +76,6 @@ function App() {
     setSum(newSum);
   }, [minutes, internet, sms, socialNetworkSum, rentValue, buyValue]);
 
-
   return (
     <main>
       <h1>Настройте тариф</h1>
@@ -83,10 +84,8 @@ function App() {
 
         <div className="operator">
           <h3> Телефон</h3>
-          <input style={{ border: !isValid ? '1px solid red' : '' }} value={phoneValue} onChange={(e) => setPhoneValue(e.target.value)} type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" />
+          <input style={{ border: !isValid ? '1px solid red' : '' }} value={phoneValue} onChange={(e) => handleChangePhone(e)} type="tel" id="phone" name="phone" placeholder="+7 (___) ___-__-__" />
           <p>
-
-
             {!isValid ? <span style={{ color: 'red' }}> Неверный формат</span> : 'Обязательное поле'}
           </p>
         </div>
